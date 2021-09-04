@@ -18,6 +18,10 @@ urlpatterns=[
     path('update_action_api/',views.update_data_read,name='update_data_read'),
     path('deletesearch/',views.deletesearchapi,name='deletesearchapi'),
     path('delete_action_api/',views.delete_data_read,name='delete_data_read'),
+
+
+    path('login/', views.loginview, name='loginview'),
+    path('logincheck/', views.login_check, name='login_check'),
     
     
 ]

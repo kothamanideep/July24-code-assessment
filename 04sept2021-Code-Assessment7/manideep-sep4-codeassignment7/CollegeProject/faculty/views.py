@@ -143,3 +143,39 @@ def delete_data_read(request):
         ApiLink="http://localhost:8000/faculty/view/" +getnewid
         requests.delete(ApiLink)
         return HttpResponse("data has be deleted successfully")
+
+def loginview(request):
+    return render(request, 'login.html')
+# def regview(request):
+#     return render(request, 'register.html')
+
+
+@csrf_exempt
+def login_check(request):
+    try:
+        getUsername = request.POST.get("username")
+        getPassword = request.POST.get("password")
+        getUsers = Doctor.objects.filter(username=getUsername, password=getPassword)
+        user_serialiser = doctorSerializer(getUsers, many=True)
+        print(user_serialiser.data)
+        if (user_serialiser.data):
+            for i in user_serialiser.data:
+                getId = i["id"]
+                # getName = i["name"]
+                getUsername = i["username"]
+            # Session set 
+            request.session['uid'] = getId
+            # request.session['uname'] = getName
+            #Session 
+                 
+            return redirect(add_d)
+
+
+        else:
+            return HttpResponse("Invalid Credentials")        
+            
+            
+    except Doctor.DoesNotExist:
+        return HttpResponse("Invalid Username or Password ", status=status.HTTP_404_NOT_FOUND)
+    except:
+        return HttpResponse("Something went wrong")

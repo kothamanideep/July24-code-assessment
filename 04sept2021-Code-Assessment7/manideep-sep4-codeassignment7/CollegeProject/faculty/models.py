@@ -5,5 +5,6 @@ class Faculty(models.Model):
     department=models.CharField(max_length=50)
     address=models.CharField(max_length=25)
     mobilenumber=models.BigIntegerField()
-    
+    username=models.CharField(max_length=40,default='',blank=True)
+    password=models.CharField(max_length=40, default='', blank=True)
     
